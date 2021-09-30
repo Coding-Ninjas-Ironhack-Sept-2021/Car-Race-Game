@@ -18,6 +18,16 @@ class Game {
             this.obstacleArr.forEach( (obstacle) => {
                 obstacle.moveDown();
                 obstacle.draw();
+                //@todo: if an obstacle is outsite the board, we need to remove it
+            });
+
+            //collision detection
+            this.obstacleArr.forEach( (obstacle) => {
+                if(obstacle.y === 100) {
+                    if(this.car.x < obstacle.x + obstacle.width && this.car.x + this.car.width > obstacle.x){
+                        alert("game over!");
+                    }
+                }
             });
 
             //create new obstacles
@@ -26,7 +36,7 @@ class Game {
                 newObstacle.create();
                 this.obstacleArr.push(newObstacle);
             }
-        }, 200);
+        }, 400);
 
     }
 
@@ -34,10 +44,10 @@ class Game {
         document.addEventListener("keydown", (event) => {
             if(event.key === "ArrowLeft"){
                 this.car.moveLeft();
-                this.car.draw(); //@todo
+                this.car.draw();
             } else if (event.key === "ArrowRight") {
                 this.car.moveRight();
-                this.car.draw(); //@todo
+                this.car.draw();
             }
         });
     }
