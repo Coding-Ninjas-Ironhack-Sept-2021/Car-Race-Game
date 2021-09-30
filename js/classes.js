@@ -88,13 +88,18 @@ class Car extends Thing {
         this.y = 100;
         this.width = 10;
         this.height = 20;
+        this.movementSpeed = 3;
         this.className = "car";
     }
     moveLeft(){
-        this.x--;
+        if(this.x > 0){
+            this.x -= this.movementSpeed;
+        }
     }
     moveRight(){
-        this.x++;
+        if(this.x + this.width < 100){
+            this.x += this.movementSpeed;
+        }
     }
 }
 
