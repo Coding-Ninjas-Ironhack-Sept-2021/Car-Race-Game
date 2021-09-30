@@ -14,21 +14,25 @@ class Game {
             //update timer
             this.currentTime++;
 
-            //update obstacle positions
+            
             this.obstacleArr.forEach( (obstacle) => {
+                //update obstacle positions
                 obstacle.moveDown();
                 obstacle.draw();
-                //@todo: if an obstacle is outsite the board, we need to remove it
-            });
-
-            //collision detection
-            this.obstacleArr.forEach( (obstacle) => {
+                
                 if(obstacle.y === 100) {
+                    //collision detection
                     if(this.car.x < obstacle.x + obstacle.width && this.car.x + this.car.width > obstacle.x){
                         alert("game over!");
                     }
+                } else if(obstacle.y > 100) {
+                    //remove obstacles off the board
+                    obstacle.remove(); //remove from the DOM
+                    this.obstacleArr.shift(); //remove from our array of obstacles
                 }
+
             });
+
 
             //create new obstacles
             if(this.currentTime % 8 === 0){
@@ -59,12 +63,15 @@ class Game {
 class Thing {
     constructor(){
         this.domElm = null;
+        this.gameElm = document.getElementById("game");
     }
     create(){
         this.domElm = document.createElement("div");
         this.domElm.className = this.className;
-        const gameElm = document.getElementById("game");        
-        gameElm.appendChild(this.domElm);
+        this.gameElm.appendChild(this.domElm);
+    }
+    remove(){
+        this.gameElm.removeChild(this.domElm);
     }
     draw(){
         this.domElm.style.width = this.width + "%";
