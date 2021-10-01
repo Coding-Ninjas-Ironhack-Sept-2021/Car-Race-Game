@@ -84,10 +84,10 @@ class Thing {
 class Car extends Thing {
     constructor(){
         super();
-        this.x = 50;
-        this.y = 100;
         this.width = 10;
         this.height = 20;
+        this.x = 50;
+        this.y = 100;
         this.movementSpeed = 3;
         this.className = "car";
     }
@@ -107,10 +107,10 @@ class Car extends Thing {
 class Obstacle extends Thing {
     constructor(){
         super();
-        this.x = 50;
-        this.y = 0;
         this.width = 20;
         this.height = 5;
+        this.x = Math.floor(Math.random() * (100 -this.width + 1)); //random position between 0 and (100 -this.width)
+        this.y = 0;
         this.className = "obstacle";
     }
     moveDown(){
