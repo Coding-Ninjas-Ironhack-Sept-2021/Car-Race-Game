@@ -35,12 +35,12 @@ class Game {
 
 
             //create new obstacles
-            if(this.currentTime % 8 === 0){
+            if(this.currentTime % 5 === 0){
                 const newObstacle = new Obstacle();
                 newObstacle.create();
                 this.obstacleArr.push(newObstacle);
             }
-        }, 400);
+        }, 200);
 
     }
 
@@ -56,7 +56,6 @@ class Game {
         });
     }
 }
-
 
 
 
@@ -107,7 +106,7 @@ class Car extends Thing {
 class Obstacle extends Thing {
     constructor(){
         super();
-        this.width = 20;
+        this.width = Math.floor(Math.random() * (40 - 10 + 1) + 10); //random size between 10 and 40
         this.height = 5;
         this.x = Math.floor(Math.random() * (100 -this.width + 1)); //random position between 0 and (100 -this.width)
         this.y = 0;
